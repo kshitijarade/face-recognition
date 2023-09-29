@@ -8,10 +8,10 @@ from insightface.app import FaceAnalysis
 from insightface.data import get_image as ins_get_image
 
 # print(os.getcwd())
-img_path = 'C://Users//kshit//AppData//Roaming//Python//Python311//site-packages//insightface//data//images'
+img_dir_path = '<Path to image directory>'
 file_names = []
 
-for imgFile in os.listdir(img_path):
+for imgFile in os.listdir(img_dir_path):
     tmp = imgFile.split('.', 1)
     file_names.append(tmp[0])
 
@@ -21,6 +21,7 @@ app = FaceAnalysis(name='buffalo_l')
 app.prepare(ctx_id=0, det_size=(640, 640))
 swapper = insightface.model_zoo.get_model('inswapper_128.onnx', download=True, download_zip=True)
 
+# Add list file face file names without extension
 for template_face in ['tg1', 'ts', 'tt', 'ab']:
     img = ins_get_image(template_face)
     faces = app.get(img)
